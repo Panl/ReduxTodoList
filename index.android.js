@@ -15,7 +15,7 @@ import {
 
 import MainTodo from './js/MainToDo'
 import { TodoDetail } from './js/TodoDetail'
-import { createStore， applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import rootReducer, { App } from './js/reducers/TodoReducer'
 import {Provider, connect} from 'react-redux';
 import thunk from 'redux-thunk';

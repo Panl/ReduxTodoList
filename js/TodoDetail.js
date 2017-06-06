@@ -6,7 +6,7 @@ import ReactNative, {
 } from 'react-native';
 import { store }  from '../index.android'
 import { update_todo } from './actions/ActionConstants'
-import {Todo} from './type'
+import { Todo } from './type'
 import { connect } from 'react-redux'
 
  class TodoDetail extends Component {

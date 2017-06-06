@@ -22,10 +22,6 @@ export class TodoCell extends Component {
         return (
             <TouchableNativeFeedback
                 background={TouchableNativeFeedback.SelectableBackground()} 
-                onLongPress={()=>{
-                    console.log('longPressed: ', this.props.todo)
-                    store.dispatch(delete_todo(this.props.todo))
-                }}
                 onPress={()=>{
                     navigate('TodoDetail', {todo: this.props.todo})
                 }}>

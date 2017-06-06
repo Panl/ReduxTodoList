@@ -16,30 +16,47 @@ import { addNavigationHelpers } from 'react-navigation';
 
 import { combineReducers } from 'redux'
 
-export function todoList (state = ['1', '2', '3'], action) {
+export function todoList (state = {isFetching: false, todoList: []}, action) {
     switch(action.type) {
         case ADD_TODO :
-            newState = Array.from(state)
-            newState.push(action.todo.id)
+            newState = Object.assign({}, state)
+            newState.todoList.push(action.todo.id)
             return newState
         case DELETE_TODO :
-            newState = Array.from(state)
-            newState.filter((value)=>{return value != action.todo.id })
+            newState = Object.assign({}, state)
+            newState.todoList.filter((value)=>{return value != action.todo.id })
+            return newState
+        case FETCH_TODO_LIST_SUCCESS :
+            newState = {isFetching: false, todoList: []}
+            newState.isFetching=false
+            for (todo of action.data) {
+                newState.todoList.push(todo.id)
+            }
+            return newState
+        case FETCH_TODO_LIST :
+            newState = Object.assign({}, state)
+            newState.isFetching = true
             return newState
         default:
             return state
     }
 }
 
-export function todoEntities (state = {'1': {id: '1', title: 'Todo 1'}, '2': {id: '2', title: 'Todo 2'}, '3': {id: '3', title: 'Todo 3'}}, action) {
+export function todoEntities (state = {}, action) {
     switch(action.type) {
         case ADD_TODO :
             newState = Object.assign({}, state)
-            newState[`${action.todo.id}`] = action.todo
+            newState[action.todo.id] = action.todo
             return newState
         case UPDATE_TODO :
             newState = Object.assign({}, state)
-            newState[`${action.todo.id}`] = action.todo
+            newState[action.todo.id] = action.todo
+            return newState
+        case FETCH_TODO_LIST_SUCCESS :
+            newState = Object.assign({}, state)
+            for (todo of action.data) {
+                newState[todo.id] = todo
+            }
             return newState
         default:
             return state
