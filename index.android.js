@@ -19,8 +19,9 @@ import { createStore, applyMiddleware } from 'redux'
 import rootReducer, { App } from './js/reducers/TodoReducer'
 import {Provider, connect} from 'react-redux';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger'
 
-export const store = createStore(rootReducer, applyMiddleware(thunk))
+export const store = createStore(rootReducer, applyMiddleware(thunk, logger))
 
 store.subscribe(()=>{
   console.log('store changed', store.getState())
