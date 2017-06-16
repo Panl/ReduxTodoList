@@ -20,8 +20,9 @@ import rootReducer, { App } from './js/reducers/TodoReducer'
 import {Provider, connect} from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-export const store = createStore(rootReducer, applyMiddleware(thunk, logger))
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)))
 
 store.subscribe(()=>{
   console.log('store changed', store.getState())
@@ -42,6 +43,7 @@ class Root extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
